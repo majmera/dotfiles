@@ -1,0 +1,20 @@
+;; -*- emacs-lisp -*- <17/10/06 12:04:20 /Users/ajmerm/.emacs.d/tramp>
+;; Tramp connection history.  Don't change this file.
+;; You can delete it, forcing Tramp to reapply the checks.
+
+((["ssh" "ajmerm" "10.141.32.151" nil nil]
+  ("uname" "Linux 3.12.39-47-default")
+  ("locale" "LC_ALL=en_US.utf8")
+  ("test" "test")
+  ("remote-path"
+   ("/bin" "/usr/bin" "/sbin" "/usr/sbin" "/usr/local/bin" "/usr/local/sbin"))
+  ("remote-shell" "/bin/sh")
+  ("perl-file-spec" t)
+  ("perl-cwd-realpath" t)
+  ("perl" "\\perl")
+  ("readlink" "\\readlink")
+  ("stat" nil)
+  ("id" "/usr/bin/id")
+  ("gid-integer" 50)
+  ("gid-string" "rtpucd")
+  ("file-exists" "test -e")))

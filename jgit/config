@@ -1,0 +1,12 @@
+[filesystem "Eclipse Adoptium|21.0.8|/dev/mapper/home-homevol"]
+	timestampResolution = 3247 nanoseconds
+	minRacyThreshold = 5324 microseconds
+[filesystem "Eclipse Adoptium|21.0.9|/dev/mapper/home-homevol"]
+	timestampResolution = 3107 nanoseconds
+	minRacyThreshold = 6424 microseconds
+[filesystem "N/A|21.0.9|/dev/mapper/home-homevol"]
+	timestampResolution = 2695 nanoseconds
+	minRacyThreshold = 4478 microseconds
+[filesystem "N/A|21.0.10|/dev/mapper/home-homevol"]
+	timestampResolution = 3650 nanoseconds
+	minRacyThreshold = 6223 microseconds

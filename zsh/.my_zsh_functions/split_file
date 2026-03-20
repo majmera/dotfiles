@@ -1,0 +1,7 @@
+local filename="$1"
+# Remove the extension from the file name
+filenameTrunc=${filename%.*}
+# Create a folder for the split files
+mkdir "${filenameTrunc}_split"
+split -d -l 1000000 ${filename} "${filenameTrunc}_split/${filenameTrunc}."
+echo "${filenameTrunc}."

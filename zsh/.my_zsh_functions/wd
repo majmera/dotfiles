@@ -1,0 +1,71 @@
+# Workspace directory navigator
+function wd() {
+  local target_key="$1"
+  local config_file="$HOME/.my_zsh_functions/.workspace_subdirs"
+
+
+  # Load config into associative array
+  local -A subdir_map
+  if [[ -f "$config_file" ]]; then
+    while IFS='=' read -r key value; do
+      # Trim whitespace
+      key="${key//[[:space:]]/}"
+      value="${value//[[:space:]]/}"
+
+      # Skip empty or commented lines
+      [[ -z "$key" || "$key" == \#* || -z "$value" ]] && continue
+
+      subdir_map[$key]="$value"
+    done < "$config_file"
+  else
+    echo "Config file not found: $config_file"
+    return 1
+  fi
+
+  # Validate input
+  if [[ -z "$target_key" || -z "${subdir_map[$target_key]}" ]]; then
+    echo "Usage: wd [${(k)subdir_map}]"
+    return 1
+  fi
+
+  # Get current directory
+  local current_dir=$(pwd)
+
+  # Traverse up to find a matching workspace root
+  local workspace_root=""
+  local dir="$current_dir"
+  while [[ "$dir" != "/" ]]; do
+    if [[ "$dir" =~ ^$HOME/ws[0-9]+/cyclone$ ]]; then
+      workspace_root="$dir"
+      break
+    fi
+    dir=$(dirname "$dir")
+  done
+
+  # Fail if no workspace root found
+  if [[ -z "$workspace_root" ]]; then
+    echo "Error: You are not inside a recognized workspace (~/wsX/cyclone)"
+    return 1
+  fi
+
+  # Construct target path
+  local target_path="$workspace_root/${subdir_map[$target_key]}"
+
+  # Navigate if path exists
+  if [[ -d "$target_path" ]]; then
+    echo "Navigating to: $target_path"
+    cd "$target_path"
+  else
+    echo "Target path does not exist: $target_path"
+    return 1
+  fi
+}
+
+# Zsh completion for wd
+# The function name must be `_wd` to be autoloaded for the `wd` command.
+function _wd {
+local config_file="${HOME}/.my_zsh_functions/.workspace_subdirs"
+local -a keys
+keys=(${(f)"$(grep -v '^\s*\(#\|$\)' "$config_file" 2>/dev/null | cut -d'=' -f1 | sed 's/[[:space:]]//g')"})
+_describe 'keys' keys
+} 

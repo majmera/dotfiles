@@ -1,0 +1,3 @@
+bin=source/cyc_core/datapath/debug/simulation/bin
+cyc_helpers=source/cyc_core/cyc_helpers
+cyc_configs=source/cyc_core/cyc

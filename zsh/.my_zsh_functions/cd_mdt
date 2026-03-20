@@ -1,0 +1,3 @@
+# Sample path
+# /disks/jiraproduction/0274000-0274999/MDT-274250/
+cd /disks/jiraproduction/0${1:0:3}000-0${1:0:3}999/MDT-$1/ 
