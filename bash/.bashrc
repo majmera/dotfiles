@@ -30,3 +30,5 @@ if [[ "${WINDSURF_CASCADE_TERMINAL:-}" == "1" ]]; then
         builtin set "$@"
     }
 fi
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
