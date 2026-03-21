@@ -68,6 +68,17 @@ zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
 
 # Aliases
 alias  ls='ls --color'
+alias enw="emacs -nw"
+alias tmux_attach="tmux a -t"
+
+FPATH=~/.my_zsh_functions:$FPATH
+autoload -Uz split_file
+autoload -Uz wd
+
+export EDITOR="/usr/bin/emacs -nw"
+export VISUAL="/usr/bin/emacs -nw"
+export PATH="$PATH:/home/cyc/centos8_tools/bin"
+path+=('/home/cyc/.local/bin')
 
 # Shell integrations
 eval "$(fzf --zsh)"
