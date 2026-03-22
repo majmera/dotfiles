@@ -6,7 +6,7 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
 fi
 
 # Directory for the Zinit plugin manager
-ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
+ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.config}/zinit/zinit.git"
 
 # Download Zinit if it is not there yet.
 if [ ! -d "$ZINIT_HOME" ]; then
@@ -44,8 +44,13 @@ zinit cdreplay -q
 bindkey -e
 bindkey '^p' history-search-backward
 bindkey '^n' history-search-forward
+
+# Workaround for broken Ctrl+-> and CTRL+<-
 bindkey "^[[1;5C" forward-word
 bindkey "^[[1;5D" backward-word
+
+# Tag to accept auto-suggestions
+bindkey '^I' autosuggest-accept
 
 # History
 HISTSIZE=5000
@@ -67,7 +72,7 @@ zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
 zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
 
 # Aliases
-alias  ls='ls --color'
+alias ls='ls --color'
 alias enw="emacs -nw"
 alias tmux_attach="tmux a -t"
 
@@ -84,4 +89,8 @@ path+=('/home/cyc/.local/bin')
 eval "$(fzf --zsh)"
 eval "$(zoxide init --cmd cd zsh)"
 
-
+# Based on https://medium.com/@hitechluddite/ditch-cleartext-secrets-how-to-safeguard-api-keys-in-zsh-and-bash-with-pass-77f694b9ff64
+export CONFLUENCE_TOKEN=$(pass show confluence/pat)
+export JIRA_TOKEN=$(pass show jira/pat)
+export GITHUB_TOKEN=$(pass show gh/pat)
+export JENKINS_TOKEN=$(pass show jenkins/pat)
