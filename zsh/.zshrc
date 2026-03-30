@@ -54,7 +54,7 @@ bindkey "^[[1;3C" forward-word
 bindkey "^[[1;3D" backward-word
 
 # Tag to accept auto-suggestions
-bindkey '^I' autosuggest-accept
+#bindkey '^I' autosuggest-accept
 
 # History
 HISTSIZE=5000

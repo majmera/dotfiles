@@ -3,6 +3,8 @@
              '("melpa" . "https://melpa.org/packages/"))
 (package-initialize)
 
+(require 'color-theme-sanityinc-tomorrow)
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
