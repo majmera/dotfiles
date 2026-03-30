@@ -1,3 +1,15 @@
+# Load zsh functions
+FPATH=~/.my_zsh_functions:$FPATH
+autoload -Uz split_file
+autoload -Uz wd
+autoload -Uz ws_remind
+
+# Show workspace branches on SSH login
+if [[ -n "$SSH_CONNECTION" ]]; then
+  echo "Workspaces:"
+  ws_remind
+fi
+
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
@@ -80,11 +92,6 @@ alias ls='ls --color'
 alias enw="emacs -nw"
 alias tmux_attach="tmux a -t"
 
-FPATH=~/.my_zsh_functions:$FPATH
-autoload -Uz split_file
-autoload -Uz wd
-autoload -Uz ws_remind
-
 export EDITOR="/usr/bin/emacs -nw"
 export VISUAL="/usr/bin/emacs -nw"
 export PATH="$PATH:/home/cyc/centos8_tools/bin"
@@ -100,8 +107,3 @@ export JIRA_TOKEN=$(pass show jira/pat)
 export GITHUB_TOKEN=$(pass show gh/pat)
 export JENKINS_TOKEN=$(pass show jenkins/pat)
 
-# Show workspace branches on SSH login
-if [[ -n "$SSH_CONNECTION" ]]; then
-  echo "Workspaces:"
-  ws_remind
-fi
