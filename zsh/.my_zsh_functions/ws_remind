@@ -1,0 +1,10 @@
+# Display the current git branch for each workspace
+function ws_remind() {
+  for dir in "$HOME"/ws[0-9]*/cyclone(N/); do
+    local ws="${dir%/cyclone}"
+    local num="${ws##*ws}"
+    local branch=$(git -C "$dir" rev-parse --abbrev-ref HEAD 2>/dev/null)
+    : "${branch:=(not a git repo)}"
+    printf "  ws%-2s  %s\n" "$num" "$branch"
+  done
+}

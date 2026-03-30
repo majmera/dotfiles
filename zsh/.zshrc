@@ -49,6 +49,10 @@ bindkey '^n' history-search-forward
 bindkey "^[[1;5C" forward-word
 bindkey "^[[1;5D" backward-word
 
+# workaround for broke alt+-> and alt+<-
+bindkey "^[[1;3C" forward-word
+bindkey "^[[1;3D" backward-word
+
 # Tag to accept auto-suggestions
 bindkey '^I' autosuggest-accept
 
@@ -79,6 +83,7 @@ alias tmux_attach="tmux a -t"
 FPATH=~/.my_zsh_functions:$FPATH
 autoload -Uz split_file
 autoload -Uz wd
+autoload -Uz ws_remind
 
 export EDITOR="/usr/bin/emacs -nw"
 export VISUAL="/usr/bin/emacs -nw"
@@ -94,3 +99,9 @@ export CONFLUENCE_TOKEN=$(pass show confluence/pat)
 export JIRA_TOKEN=$(pass show jira/pat)
 export GITHUB_TOKEN=$(pass show gh/pat)
 export JENKINS_TOKEN=$(pass show jenkins/pat)
+
+# Show workspace branches on SSH login
+if [[ -n "$SSH_CONNECTION" ]]; then
+  echo "Workspaces:"
+  ws_remind
+fi
