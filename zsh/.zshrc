@@ -67,6 +67,9 @@ bindkey "^[[1;5D" backward-word
 bindkey "^[[1;3C" forward-word
 bindkey "^[[1;3D" backward-word
 
+# Alt+Backspace deletes one word at a time
+bindkey '^[^?' backward-kill-word
+
 # Tag to accept auto-suggestions
 #bindkey '^I' autosuggest-accept
 
