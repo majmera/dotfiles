@@ -94,6 +94,8 @@ zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
 alias ls='ls --color'
 alias enw="emacs -nw"
 alias tmux_attach="tmux a -t"
+alias DevVM-Dri="cyc@10.244.233.233"
+alias DevVM-Dri-Drm="cyc@10.227.226.20"
 
 export EDITOR="/usr/bin/emacs -nw"
 export VISUAL="/usr/bin/emacs -nw"
