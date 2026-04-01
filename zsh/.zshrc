@@ -36,10 +36,12 @@ source "${ZINIT_HOME}/zinit.zsh"
 zinit ice depth=1; zinit light romkatv/powerlevel10k
 
 # Add zsh-syntax highlight, autocomplete, autosuggestion
-zinit light zsh-users/zsh-syntax-highlighting
+# Note: zsh-syntax-highlighting must be loaded AFTER zsh-autosuggestions,
+# otherwise it breaks partial-accept (word-by-word Ctrl+arrow) for suggestions.
 zinit light zsh-users/zsh-completions
 zinit light zsh-users/zsh-autosuggestions
 zinit light Aloxaf/fzf-tab
+zinit light zsh-users/zsh-syntax-highlighting
 
 # Add in snippets
 zinit snippet OMZP::git
