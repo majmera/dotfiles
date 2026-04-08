@@ -1,0 +1,15 @@
+{
+  "shell": {
+    "setup_complete": true
+  },
+  "theme_mode": "dark",
+  "agent": {
+    "model": "gpt-5-3-codex-xhigh"
+  },
+  "permissions": {
+    "allow": [
+      "Fetch(domain:eos2git.cec.lab.emc.com)",
+      "Read(/disks/jirasupportmaterials/PowerStore/07890000-07900000/7891128/cyclone_1775479913/source/cyc_core)"
+    ]
+  }
+}
