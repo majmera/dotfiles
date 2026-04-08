@@ -4,6 +4,8 @@ autoload -Uz split_file
 autoload -Uz wd
 autoload -Uz ws_remind
 
+WORDCHARS=${WORDCHARS//\/}
+
 # Show workspace branches on SSH login
 if [[ -n "$SSH_CONNECTION" ]]; then
   echo "Workspaces:"
