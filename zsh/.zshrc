@@ -2,15 +2,15 @@
 FPATH=~/.my_zsh_functions:$FPATH
 autoload -Uz split_file
 autoload -Uz wd
-autoload -Uz ws_remind
+#autoload -Uz ws_remind
 
 WORDCHARS=${WORDCHARS//\/}
 
 # Show workspace branches on SSH login
-if [[ -n "$SSH_CONNECTION" ]]; then
-  echo "Workspaces:"
-  ws_remind
-fi
+#if [[ -n "$SSH_CONNECTION" ]]; then
+#  echo "Workspaces:"
+#  ws_remind
+#fi
 
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
@@ -105,6 +105,7 @@ export EDITOR="/usr/bin/emacs -nw"
 export VISUAL="/usr/bin/emacs -nw"
 export PATH="$PATH:/home/cyc/centos8_tools/bin"
 path+=('/home/cyc/.local/bin')
+path+=('/home/cyc/.cargo/bin')
 
 # Shell integrations
 eval "$(fzf --zsh)"

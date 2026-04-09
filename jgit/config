@@ -10,3 +10,6 @@
 [filesystem "N/A|21.0.10|/dev/mapper/home-homevol"]
 	timestampResolution = 3035 nanoseconds
 	minRacyThreshold = 4836 microseconds
+[filesystem "Eclipse Adoptium|21.0.10|/dev/mapper/home-homevol"]
+	timestampResolution = 3747 nanoseconds
+	minRacyThreshold = 6269 microseconds
