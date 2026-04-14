@@ -2,7 +2,7 @@
 FPATH=~/.my_zsh_functions:$FPATH
 autoload -Uz split_file
 autoload -Uz wd
-#autoload -Uz ws_remind
+autoload -Uz ws_remind
 
 WORDCHARS=${WORDCHARS//\/}
 
@@ -42,8 +42,10 @@ zinit ice depth=1; zinit light romkatv/powerlevel10k
 # otherwise it breaks partial-accept (word-by-word Ctrl+arrow) for suggestions.
 zinit light zsh-users/zsh-completions
 zinit light zsh-users/zsh-autosuggestions
-zinit light Aloxaf/fzf-tab
+#zinit light Aloxaf/fzf-tab
 zinit light zsh-users/zsh-syntax-highlighting
+#zinit light marlonrichert/zsh-autocomplete
+zinit light zsh-users/zaw
 
 # Add in snippets
 zinit snippet OMZP::git
@@ -75,6 +77,20 @@ bindkey '^[^?' backward-kill-word
 # Tag to accept auto-suggestions
 #bindkey '^I' autosuggest-accept
 
+#zaw customizations 
+bindkey '^R' zaw-history
+zstyle ':filter-select:highlight' selected
+zstyle ':filter-select:highlight' matched
+zstyle ':filter-select:highlight' marked
+zstyle ':filter-select:highlight' title
+zstyle ':filter-select:highlight' error
+
+# Completion styling
+zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
+#zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
+#zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
+zstyle ':completion:*' menu select
+
 # History
 HISTSIZE=5000
 HISTFILE=~/.zsh_history
@@ -88,18 +104,12 @@ setopt hist_save_no_dups
 setopt hist_ignore_dups
 setopt hist_find_no_dups
 
-# Completion styling
-zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
-zstyle ':completion:*' menu no
-zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
-zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
+
 
 # Aliases
 alias ls='ls --color'
 alias enw="emacs -nw"
 alias tmux_attach="tmux a -t"
-alias DevVM-Dri="cyc@10.244.233.233"
-alias DevVM-Dri-Drm="cyc@10.227.226.20"
 
 export EDITOR="/usr/bin/emacs -nw"
 export VISUAL="/usr/bin/emacs -nw"
@@ -108,7 +118,7 @@ path+=('/home/cyc/.local/bin')
 path+=('/home/cyc/.cargo/bin')
 
 # Shell integrations
-eval "$(fzf --zsh)"
+#eval "$(fzf --zsh)"
 eval "$(zoxide init --cmd cd zsh)"
 
 # Based on https://medium.com/@hitechluddite/ditch-cleartext-secrets-how-to-safeguard-api-keys-in-zsh-and-bash-with-pass-77f694b9ff64
@@ -117,3 +127,4 @@ export JIRA_TOKEN=$(pass show jira/pat)
 export GITHUB_TOKEN=$(pass show gh/pat)
 export JENKINS_TOKEN=$(pass show jenkins/pat)
 
+source /home/cyc/.local/share/zinit/plugins/zsh-users---zaw/zaw.zsh
