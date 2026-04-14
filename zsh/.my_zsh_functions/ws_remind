@@ -1,10 +1,15 @@
-# Display the current git branch for each workspace
+# Display the current git branch and tracking branch for each workspace
 function ws_remind() {
   for dir in "$HOME"/ws[0-9]*/cyclone(N/); do
     local ws="${dir%/cyclone}"
     local num="${ws##*ws}"
     local branch=$(git -C "$dir" rev-parse --abbrev-ref HEAD 2>/dev/null)
     : "${branch:=(not a git repo)}"
-    printf "  ws%-2s  %s\n" "$num" "$branch"
+    local tracking=$(git -C "$dir" rev-parse --abbrev-ref --symbolic-full-name @{u} 2>/dev/null)
+    if [[ -n "$tracking" ]]; then
+      printf "  ws%-2s  %s -> %s\n" "$num" "$branch" "$tracking"
+    else
+      printf "  ws%-2s  %s (no tracking branch)\n" "$num" "$branch"
+    fi
   done
 }
