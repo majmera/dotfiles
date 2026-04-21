@@ -3,6 +3,8 @@ FPATH=~/.my_zsh_functions:$FPATH
 autoload -Uz split_file
 autoload -Uz wd
 autoload -Uz ws_remind
+autoload -Uz cd_sm
+autoload -Uz _cd_sm
 
 WORDCHARS=${WORDCHARS//\/}
 
@@ -52,6 +54,7 @@ zinit snippet OMZP::git
 
 # Load completions
 autoload -U compinit && compinit
+compdef _cd_sm cd_sm
 
 zinit cdreplay -q
 
