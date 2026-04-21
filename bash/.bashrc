@@ -32,4 +32,10 @@ if [[ "${WINDSURF_CASCADE_TERMINAL:-}" == "1" ]]; then
 fi
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
-eval "$(starship init bash)"
+
+# >>>> BEGIN MANAGED DEVIN BLOCK >>>>
+# Add ~/.local/bin to PATH for devin
+if [[ ":$PATH:" != *":$HOME/.local/bin:"* ]]; then
+  export PATH="$HOME/.local/bin:$PATH"
+fi
+# <<<< END MANAGED DEVIN BLOCK <<<<
