@@ -1,0 +1,110 @@
+#compdef cd_sm
+
+function _cd_sm() {
+  local jira_base="${JIRA_BASE_URL:-https://jira.cec.lab.emc.com}"
+  local default_project="${JIRA_DEFAULT_PROJECT:-PSSLDF}"
+  local project_list="${CD_SM_PROJECTS:-PSSLDF PSSL03G}"
+  local cache_file="${XDG_CACHE_HOME:-$HOME/.cache}/cd_sm_completion_cache"
+  local cache_ttl=300
+  local now
+  now=$(date +%s)
+
+  if (( CURRENT != 2 )); then
+    return 0
+  fi
+
+  local -a candidates
+
+  if [[ -r "$cache_file" ]]; then
+    local cache_mtime
+    cache_mtime=$(stat -c %Y "$cache_file" 2>/dev/null)
+    if [[ -n "$cache_mtime" ]] && (( now - cache_mtime < cache_ttl )); then
+      candidates=("${(@f)$(<"$cache_file")}")
+      candidates=("${(@)candidates[1,5]}")
+      compadd -Q -a candidates
+      return 0
+    fi
+  fi
+
+  if [[ -z "$JIRA_TOKEN" ]]; then
+    local -a fallback
+    fallback=("${(@)${=project_list}/%/-}")
+    compadd -Q -a fallback
+    return 0
+  fi
+
+  local response
+  local jql_primary='(assignee = currentUser() OR reporter = currentUser() OR issuekey in issueHistory()) ORDER BY updated DESC'
+  local jql_fallback='(assignee = currentUser() OR reporter = currentUser()) ORDER BY updated DESC'
+  response=$(curl -fsS \
+    -H "Authorization: Bearer $JIRA_TOKEN" \
+    -H "Accept: application/json" \
+    --get "$jira_base/rest/api/2/search" \
+    --data-urlencode "jql=$jql_primary" \
+    --data-urlencode "maxResults=50" \
+    --data-urlencode "fields=key" 2>/dev/null)
+  if [[ $? -ne 0 || -z "$response" ]]; then
+    response=$(curl -fsS \
+      -H "Authorization: Bearer $JIRA_TOKEN" \
+      -H "Accept: application/json" \
+      --get "$jira_base/rest/api/2/search" \
+      --data-urlencode "jql=$jql_fallback" \
+      --data-urlencode "maxResults=50" \
+      --data-urlencode "fields=key" 2>/dev/null) || {
+        local -a fallback
+        fallback=("${(@)${=project_list}/%/-}")
+        compadd -Q -a fallback
+        return 0
+      }
+  fi
+
+  local parsed
+  parsed=$(RESPONSE_JSON="$response" DEFAULT_PROJECT="$default_project" PROJECT_LIST="$project_list" python3 - <<'PY'
+import json
+import os
+
+try:
+    data = json.loads(os.environ.get('RESPONSE_JSON', ''))
+except Exception:
+    print(os.environ.get('DEFAULT_PROJECT', 'PSSLDF') + '-')
+    raise SystemExit(0)
+
+default_project = os.environ.get('DEFAULT_PROJECT', 'PSSLDF')
+projects = [p for p in os.environ.get('PROJECT_LIST', 'PSSLDF PSSL03G').split() if p]
+seen = set()
+out = []
+seen_nums = set()
+
+for issue in data.get('issues', []):
+    key = issue.get('key')
+    if not key:
+        continue
+    if key not in seen:
+        seen.add(key)
+        out.append(key)
+
+for key in list(out):
+    for project in projects:
+        prefix = project + '-'
+        if key.startswith(prefix):
+            num = key[len(prefix):]
+            if num.isdigit() and num not in seen_nums:
+                seen_nums.add(num)
+                out.append(num)
+            break
+
+if not out:
+    out = [default_project + '-']
+
+print('\n'.join(out))
+PY
+)
+
+  candidates=("${(@f)parsed}")
+  candidates=("${(@)candidates[1,5]}")
+
+  mkdir -p "${cache_file:h}" 2>/dev/null
+  printf '%s\n' "${candidates[@]}" >| "$cache_file" 2>/dev/null
+
+  compadd -Q -a candidates
+}
