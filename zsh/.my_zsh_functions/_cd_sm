@@ -34,8 +34,8 @@ function _cd_sm() {
   fi
 
   local response
-  local jql_primary='(assignee = currentUser() OR reporter = currentUser() OR issuekey in issueHistory()) ORDER BY updated DESC'
-  local jql_fallback='(assignee = currentUser() OR reporter = currentUser()) ORDER BY updated DESC'
+  local jql_primary='issuetype = Defect AND (assignee = currentUser() OR reporter = currentUser() OR issuekey in issueHistory()) ORDER BY updated DESC'
+  local jql_fallback='issuetype = Defect AND (assignee = currentUser() OR reporter = currentUser()) ORDER BY updated DESC'
   response=$(curl -fsS \
     -H "Authorization: Bearer $JIRA_TOKEN" \
     -H "Accept: application/json" \

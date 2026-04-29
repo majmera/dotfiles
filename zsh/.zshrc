@@ -5,6 +5,7 @@ autoload -Uz wd
 autoload -Uz ws_remind
 autoload -Uz cd_sm
 autoload -Uz _cd_sm
+autoload -Uz za
 
 WORDCHARS=${WORDCHARS//\/}
 

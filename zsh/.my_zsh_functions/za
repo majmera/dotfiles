@@ -1,0 +1,5 @@
+# Interactively select and attach to a zellij session
+local session
+session=$(zellij ls 2>/dev/null | fzf --ansi --height=~50% --reverse --prompt="attach> ") || return 0
+session=${session%% *}
+zellij attach "$session"
