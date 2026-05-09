@@ -83,6 +83,7 @@ bindkey '^[^?' backward-kill-word
 
 #zaw customizations 
 bindkey '^R' zaw-history
+bindkey -M filterselect '^E' accept-search
 zstyle ':filter-select:highlight' selected
 zstyle ':filter-select:highlight' matched
 zstyle ':filter-select:highlight' marked
@@ -130,5 +131,3 @@ export CONFLUENCE_TOKEN=$(pass show confluence/pat)
 export JIRA_TOKEN=$(pass show jira/pat)
 export GITHUB_TOKEN=$(pass show gh/pat)
 export JENKINS_TOKEN=$(pass show jenkins/pat)
-
-source /home/cyc/.local/share/zinit/plugins/zsh-users---zaw/zaw.zsh
