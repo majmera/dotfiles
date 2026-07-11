@@ -1,7 +1,99 @@
 local filename="$1"
-# Remove the extension from the file name
-filenameTrunc=${filename%.*}
-# Create a folder for the split files
-mkdir "${filenameTrunc}_split"
-split -d -l 1000000 ${filename} "${filenameTrunc}_split/${filenameTrunc}."
+local split_size="${2:-200MB}"
+
+if [[ -z "$filename" ]]; then
+  echo "Usage: split_file <filename> [split_size]" >&2
+  return 1
+fi
+
+if [[ ! -f "$filename" ]]; then
+  echo "File not found: $filename" >&2
+  return 1
+fi
+
+local filenameTrunc="${filename%.*}"
+local output_dir="${filenameTrunc}_split"
+local output_prefix="${filenameTrunc:t}"
+
+mkdir "$output_dir" || return 1
+
+python3 - "$filename" "$output_dir" "$output_prefix" "$split_size" <<'PY'
+import re
+import sys
+from pathlib import Path
+
+
+def parse_size(value: str) -> int:
+    match = re.fullmatch(r"\s*(\d+)\s*([A-Za-z]*)\s*", value)
+    if not match:
+        raise ValueError(f"Invalid split size: {value}")
+
+    amount = int(match.group(1))
+    unit = match.group(2).lower()
+    multipliers = {
+        "": 1,
+        "b": 1,
+        "k": 1024,
+        "kb": 1000,
+        "kib": 1024,
+        "m": 1024 ** 2,
+        "mb": 1000 ** 2,
+        "mib": 1024 ** 2,
+        "g": 1024 ** 3,
+        "gb": 1000 ** 3,
+        "gib": 1024 ** 3,
+        "t": 1024 ** 4,
+        "tb": 1000 ** 4,
+        "tib": 1024 ** 4,
+    }
+    if unit not in multipliers:
+        raise ValueError(f"Unsupported size unit: {value}")
+    size = amount * multipliers[unit]
+    if size <= 0:
+        raise ValueError(f"Split size must be positive: {value}")
+    return size
+
+
+try:
+    source = Path(sys.argv[1])
+    output_dir = Path(sys.argv[2])
+    prefix = sys.argv[3]
+    target_size = parse_size(sys.argv[4])
+except ValueError as exc:
+    print(exc, file=sys.stderr)
+    sys.exit(1)
+
+part_index = 0
+current_size = 0
+current_file = None
+
+
+def open_next_part():
+    global part_index, current_size, current_file
+    if current_file is not None:
+        current_file.close()
+    part_path = output_dir / f"{prefix}.{part_index:02d}"
+    current_file = part_path.open("wb")
+    current_size = 0
+    part_index += 1
+
+
+with source.open("rb") as infile:
+    for line in iter(infile.readline, b""):
+        if current_file is None or (current_size > 0 and current_size + len(line) > target_size):
+            open_next_part()
+        current_file.write(line)
+        current_size += len(line)
+
+if current_file is None:
+    open_next_part()
+
+current_file.close()
+PY
+
+local split_status=$?
+if (( split_status != 0 )); then
+  return $split_status
+fi
+
 echo "${filenameTrunc}."

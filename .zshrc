@@ -116,10 +116,10 @@ alias ls='ls --color'
 alias enw="emacs -nw"
 alias tmux_attach="tmux a -t"
 
-export EDITOR="/usr/bin/emacs -nw"
-export VISUAL="/usr/bin/emacs -nw"
+export PATH="$HOME/.local/bin:$PATH"
+export EDITOR="emacs -nw"
+export VISUAL="emacs -nw"
 export PATH="$PATH:/home/cyc/centos8_tools/bin"
-path+=('/home/cyc/.local/bin')
 path+=('/home/cyc/.cargo/bin')
 
 # Shell integrations

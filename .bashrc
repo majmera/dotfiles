@@ -2,8 +2,11 @@
 source /home/cyc/centos8_tools/bashrc_utils/framework_utilities.sh
 # add bash completion
 #source /home/cyc/centos8_tools/bashrc_utils/completions.sh
+export PATH="$HOME/.local/bin:$PATH"
 alias enw="emacs -nw"
 alias tmux_attach="tmux a -t"
+export EDITOR="emacs -nw"
+export VISUAL="emacs -nw"
 # Configure centos8_tools
 #source /home/cyc/centos8_tools/optional/optional_startup_scripts.sh
 # Override prompt
