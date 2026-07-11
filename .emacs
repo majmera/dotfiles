@@ -3,6 +3,12 @@
              '("melpa" . "https://melpa.org/packages/"))
 (package-initialize)
 
+(dolist (pkg '(company ggtags))
+  (unless (package-installed-p pkg)
+    (unless package-archive-contents
+      (package-refresh-contents))
+    (package-install pkg)))
+
 (require 'color-theme-sanityinc-tomorrow)
 
 (custom-set-variables
@@ -95,7 +101,35 @@
   '(better-defaults
     elpy
     flycheck ;; add the flycheck package
-    material-theme))
+    material-theme
+    company))
+
+(require 'cc-mode)
+(require 'company)
+(require 'eglot)
+
+(setq company-minimum-prefix-length 1
+      company-idle-delay 0.0)
+
+(global-company-mode 1)
+
+(add-to-list 'eglot-server-programs
+             '((c-mode c++-mode) . ("clangd"
+                                    "--header-insertion=never"
+                                    "--completion-style=detailed"
+                                    "--clang-tidy")))
+
+(defun my-c/c++-mode-setup ()
+  (setq c-basic-offset 4)
+  (company-mode 1)
+  (eglot-ensure)
+  (when (require 'ggtags nil t)
+    (ggtags-mode 1))
+  (when (executable-find "clang-format")
+    (local-set-key (kbd "C-c C-f") #'clang-format-buffer)))
+
+(add-hook 'c-mode-hook #'my-c/c++-mode-setup)
+(add-hook 'c++-mode-hook #'my-c/c++-mode-setup)
 
 (global-hl-line-mode 1)
 (set-face-attribute hl-line-face nil :underline t)
