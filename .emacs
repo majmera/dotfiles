@@ -94,7 +94,11 @@
 
 
 ;; Elpy setup for Python IDE
+(require 'elpy)
+(setq elpy-modules (delq 'elpy-module-flymake elpy-modules))
 (elpy-enable)
+(require 'flycheck)
+(add-hook 'elpy-mode-hook #'flycheck-mode)
 
 ;; Make FlyMake default
 (defvar myPackages

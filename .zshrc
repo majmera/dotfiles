@@ -127,7 +127,10 @@ path+=('/home/cyc/.cargo/bin')
 eval "$(zoxide init --cmd cd zsh)"
 
 # Based on https://medium.com/@hitechluddite/ditch-cleartext-secrets-how-to-safeguard-api-keys-in-zsh-and-bash-with-pass-77f694b9ff64
+export ISG_GOVERNANCE_PATH="$HOME/repos/isg-ai-governance"
 export CONFLUENCE_TOKEN=$(pass show confluence/pat)
 export JIRA_TOKEN=$(pass show jira/pat)
 export GITHUB_TOKEN=$(pass show gh/pat)
+export GITHUB_ENTERPRISE_TOKEN="$GITHUB_TOKEN"
+export JIRA_CEC_TOKEN="$JIRA_TOKEN"
 export JENKINS_TOKEN=$(pass show jenkins/pat)
