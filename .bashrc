@@ -1,5 +1,7 @@
 # add tool to bin
-source /home/cyc/centos8_tools/bashrc_utils/framework_utilities.sh
+if [[ -r /home/cyc/centos8_tools/bashrc_utils/framework_utilities.sh ]]; then
+  source /home/cyc/centos8_tools/bashrc_utils/framework_utilities.sh
+fi
 # add bash completion
 #source /home/cyc/centos8_tools/bashrc_utils/completions.sh
 export PATH="$HOME/.local/bin:$PATH"
@@ -42,3 +44,12 @@ if [[ ":$PATH:" != *":$HOME/.local/bin:"* ]]; then
   export PATH="$HOME/.local/bin:$PATH"
 fi
 # <<<< END MANAGED DEVIN BLOCK <<<<
+
+export CONFLUENCE_TOKEN="$(pass show confluence/pat)"
+export JIRA_TOKEN="$(pass show jira/pat)"
+export GITHUB_TOKEN="$(pass show gh/pat)"
+export JENKINS_TOKEN="$(pass show jenkins/pat)"
+export GITHUB_ENTERPRISE_TOKEN="$(pass show gh/pat)"
+export JIRA_CEC_TOKEN="$(pass show jira/pat)"
+export ISG_GOVERNANCE_PATH="/home/cyc/isg-ai-governance"
+export CYCLONE_PDR="/home/cyc/cyclone"
