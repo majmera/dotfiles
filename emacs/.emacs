@@ -125,8 +125,10 @@
 
 (defun my-c/c++-mode-setup ()
   (setq c-basic-offset 4)
+  (setq-local company-backends '((company-capf company-dabbrev-code company-keywords company-files)))
   (company-mode 1)
-  (eglot-ensure)
+  (when (executable-find "clangd")
+    (eglot-ensure))
   (when (require 'ggtags nil t)
     (ggtags-mode 1))
   (when (executable-find "clang-format")
