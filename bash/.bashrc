@@ -47,9 +47,10 @@ fi
 
 export CONFLUENCE_TOKEN="$(pass show confluence/pat)"
 export JIRA_TOKEN="$(pass show jira/pat)"
-export GITHUB_TOKEN="$(pass show gh/pat)"
-export JENKINS_TOKEN="$(pass show jenkins/pat)"
 export GITHUB_ENTERPRISE_TOKEN="$(pass show gh/pat)"
+export GH_HOST="eos2git.cec.lab.emc.com"
+unset GITHUB_TOKEN GH_TOKEN
+export JENKINS_TOKEN="$(pass show jenkins/pat)"
 export JIRA_CEC_TOKEN="$(pass show jira/pat)"
 export ISG_GOVERNANCE_PATH="/home/cyc/isg-ai-governance"
 export CYCLONE_PDR="/home/cyc/cyclone"

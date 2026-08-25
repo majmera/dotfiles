@@ -130,7 +130,8 @@ eval "$(zoxide init --cmd cd zsh)"
 export ISG_GOVERNANCE_PATH="$HOME/repos/isg-ai-governance"
 export CONFLUENCE_TOKEN=$(pass show confluence/pat)
 export JIRA_TOKEN=$(pass show jira/pat)
-export GITHUB_TOKEN=$(pass show gh/pat)
-export GITHUB_ENTERPRISE_TOKEN="$GITHUB_TOKEN"
+export GITHUB_ENTERPRISE_TOKEN="$(pass show gh/pat)"
+export GH_HOST="eos2git.cec.lab.emc.com"
+unset GITHUB_TOKEN GH_TOKEN
 export JIRA_CEC_TOKEN="$JIRA_TOKEN"
 export JENKINS_TOKEN=$(pass show jenkins/pat)
