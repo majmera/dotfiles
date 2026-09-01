@@ -5,7 +5,17 @@ fi
 # add bash completion
 #source /home/cyc/centos8_tools/bashrc_utils/completions.sh
 export PATH="$HOME/.local/bin:$PATH"
-alias enw="emacs -nw"
+enw() {
+  if [[ $# -eq 0 ]]; then
+    local target
+    target="$(fzf)" || return
+    [[ -n "$target" ]] || return
+    emacs -nw "$target"
+    return
+  fi
+
+  emacs -nw "$@"
+}
 alias tmux_attach="tmux a -t"
 export EDITOR="emacs -nw"
 export VISUAL="emacs -nw"
