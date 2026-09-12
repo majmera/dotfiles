@@ -1,1 +1,9 @@
-devin/**
+devin/*
+!devin/config.json
+!devin/agents/
+!devin/agents/**
+herdr/*.log
+herdr/*.sock
+herdr/.plugins.lock
+herdr/release-notes.json
+herdr/session.json

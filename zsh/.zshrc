@@ -127,6 +127,9 @@ enw() {
 alias tmux_attach="tmux a -t"
 
 export PATH="$HOME/.local/bin:$PATH"
+if [[ ":$PATH:" != *":/home/cyc/rx-tools:"* ]]; then
+  export PATH="/home/cyc/rx-tools:$PATH"
+fi
 export EDITOR="emacs -nw"
 export VISUAL="emacs -nw"
 export PATH="$PATH:/home/cyc/centos8_tools/bin"

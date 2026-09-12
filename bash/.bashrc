@@ -5,6 +5,9 @@ fi
 # add bash completion
 #source /home/cyc/centos8_tools/bashrc_utils/completions.sh
 export PATH="$HOME/.local/bin:$PATH"
+if [[ ":$PATH:" != *":/home/cyc/rx-tools:"* ]]; then
+  export PATH="/home/cyc/rx-tools:$PATH"
+fi
 enw() {
   if [[ $# -eq 0 ]]; then
     local target
