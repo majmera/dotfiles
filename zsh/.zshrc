@@ -113,10 +113,23 @@ setopt hist_find_no_dups
 
 # Aliases
 alias ls='ls --color'
-alias enw="emacs -nw"
+enw() {
+  if [[ $# -eq 0 ]]; then
+    local target
+    target="$(fzf)" || return
+    [[ -n "$target" ]] || return
+    emacs -nw "$target"
+    return
+  fi
+
+  emacs -nw "$@"
+}
 alias tmux_attach="tmux a -t"
 
 export PATH="$HOME/.local/bin:$PATH"
+if [[ ":$PATH:" != *":/home/cyc/rx-tools:"* ]]; then
+  export PATH="/home/cyc/rx-tools:$PATH"
+fi
 export EDITOR="emacs -nw"
 export VISUAL="emacs -nw"
 export PATH="$PATH:/home/cyc/centos8_tools/bin"

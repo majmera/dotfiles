@@ -1,0 +1,32 @@
+{
+  "version": 1,
+  "devin": {
+    "org_id": "org-e788ff6b0b5b4b838f9cea3f6b1fc93e"
+  },
+  "shell": {
+    "setup_complete": true
+  },
+  "theme_mode": "dark",
+  "agent": {
+    "model": "gpt-5-6-luna-none",
+    "preferred_family_models": {
+      "gpt-5.6-luna": "gpt-5-6-luna-none"
+    }
+  },
+  "permissions": {
+    "allow": [
+      "mcp__jira-cec__*",
+      "Read(/disks/jirasupportmaterials/PowerStore)",
+      "mcp__github-eos2git__pull_request_review_write",
+      "mcp__confluence-cec__confluence_search",
+      "mcp__confluence-cec__confluence_get_page",
+      "Exec(python3)",
+      "Exec(command)",
+      "Write(/tmp)",
+      "mcp__github-eos2git__get_pull_request",
+      "Exec(./jira-helper.sh comments)",
+      "Exec(git remote)",
+      "Exec(git config)"
+    ]
+  }
+}
