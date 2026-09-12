@@ -4,3 +4,10 @@ pudb/
 devin/.devin/**
 openspec/**
 .codeium/**
+
+# Compiled and generated binary files
+*.elc
+*.pyc
+*.gpg
+*.gpg~
+*.db
