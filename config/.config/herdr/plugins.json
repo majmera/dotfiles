@@ -1,0 +1,182 @@
+[
+  {
+    "plugin_id": "herdr-quicklook",
+    "name": "herdr-quicklook",
+    "version": "0.7.0",
+    "min_herdr_version": "0.7.0",
+    "description": "Quick Look for herdr: preview clipboard paths, Ctrl-click pane tokens, follow agent suggestions, or escalate into the file viewer.",
+    "manifest_path": "/home/cyc/dotfiles/config/.config/herdr/plugins/github/herdr-quicklook-45e13010396e/herdr-plugin.toml",
+    "plugin_root": "/home/cyc/dotfiles/config/.config/herdr/plugins/github/herdr-quicklook-45e13010396e",
+    "enabled": true,
+    "platforms": [
+      "linux",
+      "macos"
+    ],
+    "actions": [
+      {
+        "id": "agent-suggestion",
+        "title": "Open the latest agent suggestion",
+        "description": "Open the newest token detected by the opt-in agent-status suggestion hook.",
+        "platforms": [
+          "linux",
+          "macos"
+        ],
+        "command": [
+          "bash",
+          "scripts/open-suggestion.sh"
+        ]
+      },
+      {
+        "id": "find",
+        "title": "Fuzzy-find a file to quick-look",
+        "description": "fzf over the repo's tracked files with a live bat preview; Enter renders the pick in the preview overlay.",
+        "platforms": [
+          "linux",
+          "macos"
+        ],
+        "command": [
+          "bash",
+          "scripts/find.sh"
+        ]
+      },
+      {
+        "id": "hint",
+        "title": "Hint-pick anything openable on screen",
+        "description": "Overlay every openable token on screen with a one-key hint label; press the key (or Ctrl+click the row) to resolve + open it immediately. No fzf, no herdr-pluck.",
+        "platforms": [
+          "linux",
+          "macos"
+        ],
+        "command": [
+          "bash",
+          "scripts/hint.sh"
+        ]
+      },
+      {
+        "id": "open-in-viewer",
+        "title": "Open a path in file viewer",
+        "description": "Open a provided or clipboard path inside the herdr-file-viewer pane (requires that plugin).",
+        "platforms": [
+          "linux",
+          "macos"
+        ],
+        "command": [
+          "bash",
+          "scripts/open-in-viewer.sh"
+        ]
+      },
+      {
+        "id": "open-link",
+        "title": "Open a virtual quicklook link",
+        "description": "Decode a link emitted by the quicklook link overlay and open its token.",
+        "platforms": [
+          "linux",
+          "macos"
+        ],
+        "command": [
+          "bash",
+          "scripts/open-link.sh"
+        ]
+      },
+      {
+        "id": "preview",
+        "title": "Quick-look a path or URL",
+        "description": "Render a provided or clipboard token in an overlay; press o inside to escalate to the file viewer.",
+        "platforms": [
+          "linux",
+          "macos"
+        ],
+        "command": [
+          "bash",
+          "scripts/open-preview.sh"
+        ]
+      },
+      {
+        "id": "recents",
+        "title": "Reopen a recent quicklook",
+        "description": "Reopen the most recently opened path/URL, or fzf-pick among the last N when fzf is installed.",
+        "platforms": [
+          "linux",
+          "macos"
+        ],
+        "command": [
+          "bash",
+          "scripts/recents.sh"
+        ]
+      }
+    ],
+    "events": [
+      {
+        "on": "pane.agent_status_changed",
+        "platforms": [
+          "linux",
+          "macos"
+        ],
+        "command": [
+          "bash",
+          "scripts/agent-suggest.sh"
+        ]
+      }
+    ],
+    "panes": [
+      {
+        "id": "find-pane",
+        "title": "Find",
+        "placement": "overlay",
+        "command": [
+          "bash",
+          "scripts/find-pane.sh"
+        ]
+      },
+      {
+        "id": "hint-pane",
+        "title": "Hint",
+        "placement": "overlay",
+        "command": [
+          "bash",
+          "scripts/hint-pane.sh"
+        ]
+      },
+      {
+        "id": "preview",
+        "title": "Preview",
+        "placement": "overlay",
+        "command": [
+          "bash",
+          "scripts/preview-pane.sh"
+        ]
+      },
+      {
+        "id": "recents-pick",
+        "title": "Recents",
+        "placement": "overlay",
+        "command": [
+          "bash",
+          "scripts/recents-pane.sh"
+        ]
+      }
+    ],
+    "link_handlers": [
+      {
+        "id": "virtual-token",
+        "title": "Open quicklook virtual token",
+        "pattern": "^https://herdr-quicklook\\.invalid/open\\?token=.+$",
+        "action": "open-link"
+      },
+      {
+        "id": "git-host-token",
+        "title": "Quick-look repository URL",
+        "pattern": "^https://(?:github\\.com/[^/]+/[^/]+/(?:blob|raw)/.+|github\\.com/[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+/pull/[0-9]+/?|raw\\.githubusercontent\\.com/[^/]+/[^/]+/.+|gitlab\\.com/[^/]+/[^/]+/-/blob/.+|bitbucket\\.org/[^/]+/[^/]+/src/.+)$",
+        "action": "preview"
+      }
+    ],
+    "source": {
+      "kind": "github",
+      "owner": "dwarvesf",
+      "repo": "herdr-quicklook",
+      "resolved_commit": "b6567740aaceeabf8fd31c002c4936bfbf1523e6",
+      "managed_path": "/home/cyc/.config/herdr/plugins/github/herdr-quicklook-45e13010396e",
+      "installed_unix_ms": 1791902904590
+    }
+  }
+]
