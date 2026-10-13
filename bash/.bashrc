@@ -68,3 +68,6 @@ export JENKINS_TOKEN="$(pass show jenkins/pat)"
 export JIRA_CEC_TOKEN="$(pass show jira/pat)"
 export ISG_GOVERNANCE_PATH="/home/cyc/isg-ai-governance"
 export CYCLONE_PDR="/home/cyc/cyclone"
+
+# PowerStore SDK - added by setup_sdk.sh on Wed Sep 23 07:05:41 PM EDT 2026
+export POWERSTORE_VENV="/home/cyc/.powerstore-sdk"
