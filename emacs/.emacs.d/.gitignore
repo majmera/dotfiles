@@ -1,1 +1,6 @@
-auto-save-list
+auto-save-list/
+elpa/
+session.*
+tramp
+network-security.data
+gnupg/

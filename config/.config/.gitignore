@@ -7,3 +7,5 @@ herdr/*.sock
 herdr/.plugins.lock
 herdr/release-notes.json
 herdr/session.json
+herdr/plugins/
+herdr/session-snapshots/

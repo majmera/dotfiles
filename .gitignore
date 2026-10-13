@@ -5,6 +5,14 @@ devin/.devin/**
 openspec/**
 .codeium/**
 
+# Tmux plugins (managed by TPM)
+tmux/.tmux/plugins/
+
+# Appliance test run artifacts
+scripts/appliance/__pycache__/
+scripts/appliance/200Run.txt
+scripts/appliance/pollist
+
 # Compiled and generated binary files
 *.elc
 *.pyc
