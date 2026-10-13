@@ -8,9 +8,16 @@
   },
   "theme_mode": "dark",
   "agent": {
-    "model": "gpt-5-6-luna-none",
+    "model": "claude-opus-5-5-medium",
     "preferred_family_models": {
-      "gpt-5.6-luna": "gpt-5-6-luna-none"
+      "gpt-5.6-sol": "gpt-5-6-sol-medium",
+      "gemini-3-7-flash": "gemini-3-7-flash-medium",
+      "gpt-5.6-luna": "gpt-5-6-luna-medium",
+      "swe-1.6": "swe-1-6",
+      "claude-opus-5-5": "claude-opus-5-5-medium",
+      "gemini-3-8-flash": "gemini-3-8-flash-low",
+      "claude-opus-5": "claude-opus-5-medium",
+      "claude-haiku-5-5": "claude-haiku-5-5-medium"
     }
   },
   "permissions": {
@@ -20,13 +27,34 @@
       "mcp__github-eos2git__pull_request_review_write",
       "mcp__confluence-cec__confluence_search",
       "mcp__confluence-cec__confluence_get_page",
+      "mcp__confluence-cec__confluence_create_page",
+      "mcp__confluence-cec__confluence_update_page",
       "Exec(python3)",
       "Exec(command)",
       "Write(/tmp)",
       "mcp__github-eos2git__get_pull_request",
       "Exec(./jira-helper.sh comments)",
       "Exec(git remote)",
-      "Exec(git config)"
+      "Exec(git config)",
+      "Exec(git)",
+      "Exec(printf)",
+      "Exec(sed)",
+      "Exec(ls)",
+      "Exec(true)",
+      "Exec(test)",
+      "Exec(awk)",
+      "Exec(./config_query.sh)",
+      "Exec(./labjungle-to-cfg.py)",
+      "Exec(docker ps)",
+      "Exec(make)",
+      "Exec(docker exec)",
+      "Exec(./interactive_dpsim_docker.sh)",
+      "Exec(interactive_dpsim_docker.sh)",
+      "Exec(./dpsim_test.py)",
+      "Exec(dpsim_test.py)",
+      "Exec(tail)",
+      "Exec(date)",
+      "Exec(tmux list-sessions)"
     ]
   }
 }
