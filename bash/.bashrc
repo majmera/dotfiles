@@ -5,6 +5,7 @@ fi
 # add bash completion
 #source /home/cyc/centos8_tools/bashrc_utils/completions.sh
 export PATH="$HOME/.local/bin:$PATH"
+export PATH="$HOME/.cargo/bin:$PATH"
 if [[ ":$PATH:" != *":/home/cyc/rx-tools:"* ]]; then
   export PATH="/home/cyc/rx-tools:$PATH"
 fi

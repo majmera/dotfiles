@@ -133,7 +133,7 @@ fi
 export EDITOR="emacs -nw"
 export VISUAL="emacs -nw"
 export PATH="$PATH:/home/cyc/centos8_tools/bin"
-path+=('/home/cyc/.cargo/bin')
+export PATH="$HOME/.cargo/bin:$PATH"
 
 # Shell integrations
 #eval "$(fzf --zsh)"
