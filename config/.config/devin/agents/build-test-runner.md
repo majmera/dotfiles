@@ -1,7 +1,7 @@
 ---
 name: build-test-runner
 description: Dedicated GPT-5.6 Luna Medium worker that implements planned code changes, builds them, and runs targeted validation tests
-model: gpt-5-6-luna-medium
+model: claude-haiku-5-5-medium
 allowed-tools:
   - read
   - grep
