@@ -34,7 +34,8 @@
  '(c-basic-offset 4)
  '(custom-enabled-themes '(sanityinc-tomorrow-eighties))
  '(custom-safe-themes
-   '("628278136f88aa1a151bb2d6c8a86bf2b7631fbea5f0f76cba2a0079cd910f7d"
+   '("04aa1c3ccaee1cc2b93b246c6fbcd597f7e6832a97aaeac7e5891e6863236f9f"
+     "628278136f88aa1a151bb2d6c8a86bf2b7631fbea5f0f76cba2a0079cd910f7d"
      "c4465c56ee0cac519dd6ab6249c7fd5bb2c7f7f78ba2875d28a50d3c20a59473"
      "f782ed87369a7d568cee28d14922aa6d639f49dd676124d817dd82c8208985d0"
      default))
@@ -45,11 +46,7 @@
  '(nrepl-message-colors
    '("#CC9393" "#DFAF8F" "#F0DFAF" "#7F9F7F" "#BFEBBF" "#93E0E3"
      "#94BFF3" "#DC8CC3"))
- '(package-selected-packages
-   '(color-theme color-theme-modern color-theme-sanityinc-tomorrow elpy
-                 evil-search-highlight-persist flycheck ggtags
-                 json-mode rainbow-delimiters rainbow-identifiers
-                 xhair))
+ '(package-selected-packages nil)
  '(sr-speedbar-max-width 40)
  '(sr-speedbar-right-side nil))
 
