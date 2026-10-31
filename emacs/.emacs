@@ -9,6 +9,7 @@
     color-theme-sanityinc-tomorrow
     company
     elpy
+    evil
     evil-search-highlight-persist
     flycheck
     ggtags
@@ -18,10 +19,12 @@
     rainbow-identifiers
     xhair))
 
+(unless (seq-every-p (lambda (pkg) (or (package-installed-p pkg) (assq pkg package-archive-contents)))
+                     my-packages)
+  (package-refresh-contents))
+
 (dolist (pkg my-packages)
   (unless (package-installed-p pkg)
-    (unless package-archive-contents
-      (package-refresh-contents))
     (package-install pkg)))
 
 (require 'color-theme-sanityinc-tomorrow)

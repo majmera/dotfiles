@@ -8,15 +8,16 @@
   },
   "theme_mode": "dark",
   "agent": {
-    "model": "gemini-3-8-flash-medium",
+    "model": "claude-haiku-5-5-medium",
     "preferred_family_models": {
-      "claude-haiku-5-5": "claude-haiku-5-5-medium",
-      "gpt-5.6-sol": "gpt-5-6-sol-medium",
-      "gemini-3-8-flash": "gemini-3-8-flash-medium",
-      "claude-opus-5": "claude-opus-5-medium",
+      "claude-sonnet-5-5": "claude-sonnet-5-5-medium",
+      "gpt-5.6-sol": "gpt-5-6-sol-xhigh",
       "swe-1.6": "swe-1-6",
-      "claude-opus-5-5": "claude-opus-5-5-medium",
+      "claude-haiku-5-5": "claude-haiku-5-5-medium",
       "gemini-3-7-flash": "gemini-3-7-flash-medium",
+      "gemini-3-8-flash": "gemini-3-8-flash-low",
+      "claude-opus-5-5": "claude-opus-5-5-high",
+      "claude-opus-5": "claude-opus-5-medium",
       "gpt-5.6-luna": "gpt-5-6-luna-medium"
     }
   },
@@ -54,7 +55,10 @@
       "Exec(dpsim_test.py)",
       "Exec(tail)",
       "Exec(date)",
-      "Exec(tmux list-sessions)"
+      "Exec(tmux list-sessions)",
+      "mcp__github-eos2git__pull_request_read",
+      "Exec(rg)",
+      "mcp__github-eos2git__*"
     ]
   }
 }
