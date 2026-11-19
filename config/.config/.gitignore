@@ -1,5 +1,5 @@
 devin/*
-!devin/config.json
+devin/config.json
 !devin/agents/
 !devin/agents/**
 herdr/*.log
