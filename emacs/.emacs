@@ -114,6 +114,7 @@
 
 ;; Elpy setup for Python IDE
 (require 'elpy)
+(setq elpy-rpc-python-command "/usr/bin/python3.11")
 (setq elpy-modules (delq 'elpy-module-flymake elpy-modules))
 (elpy-enable)
 (require 'flycheck)
